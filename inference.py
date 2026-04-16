@@ -11,7 +11,8 @@ class BiasInference:
         self.label_cols = ['Confirmation Bias', 'Overconfidence Bias', 'Anchoring Bias']
         
         # Load Classifier
-        self.bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+        from transformers import AutoTokenizer
+        self.bert_tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased', use_fast=False)
         self.classifier = self._load_classifier(classifier_path)
         self.classifier.eval()
         
