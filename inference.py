@@ -15,7 +15,8 @@ class BiasInference:
         self.classifier.eval()
         
         # Load Rewriter
-        self.t5_tokenizer = T5Tokenizer.from_pretrained(rewriter_path)
+        from transformers import AutoTokenizer
+        self.t5_tokenizer = AutoTokenizer.from_pretrained(rewriter_path, use_fast=False)
         self.rewriter = T5ForConditionalGeneration.from_pretrained(rewriter_path)
         self.rewriter.to(self.device)
         self.rewriter.eval()
