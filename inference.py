@@ -42,7 +42,7 @@ class BiasInference:
 
     def analyze(self, text):
         # 1. Classification
-        encoding = self.bert_tokenizer.encode_plus(
+        encoding = self.bert_tokenizer(
             text,
             add_special_tokens=True,
             max_length=128,
