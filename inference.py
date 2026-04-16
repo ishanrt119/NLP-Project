@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from transformers import BertTokenizer, BertModel, T5Tokenizer, T5ForConditionalGeneration
 import numpy as np
+import os
 
 class BiasInference:
     def __init__(self, classifier_path, rewriter_path):
@@ -15,8 +16,9 @@ class BiasInference:
         self.classifier.eval()
         
         # Load Rewriter
-        from transformers import AutoTokenizer
-        self.t5_tokenizer = AutoTokenizer.from_pretrained(rewriter_path, use_fast=False)
+        from transformers import T5Tokenizer
+        vocab_path = os.path.join(rewriter_path, "spiece.model")
+        self.t5_tokenizer = T5Tokenizer(vocab_file=vocab_path, use_fast=False)
         self.rewriter = T5ForConditionalGeneration.from_pretrained(rewriter_path)
         self.rewriter.to(self.device)
         self.rewriter.eval()
