@@ -7,6 +7,8 @@ class BiasInference:
     def __init__(self, classifier_path, rewriter_path):
         self.device = torch.device("mps") if torch.backends.mps.is_available() else torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
+        self.label_cols = ['Confirmation Bias', 'Overconfidence Bias', 'Anchoring Bias']
+        
         # Load Classifier
         self.bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         self.classifier = self._load_classifier(classifier_path)
@@ -17,8 +19,6 @@ class BiasInference:
         self.rewriter = T5ForConditionalGeneration.from_pretrained(rewriter_path)
         self.rewriter.to(self.device)
         self.rewriter.eval()
-        
-        self.label_cols = ['Confirmation Bias', 'Overconfidence Bias', 'Anchoring Bias']
 
     def _load_classifier(self, path):
         # Local definition of classifier for loading
