@@ -1,0 +1,22 @@
+# Models and datasets
+models/
+bias_dataset.csv
+*.bin
+*.safetensors
+*.model
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# Streamlit
+.streamlit/
+
+# OS
+.DS_Store

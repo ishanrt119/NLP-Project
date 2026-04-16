@@ -1,0 +1,10 @@
+torch
+torchvision
+torchaudio
+transformers
+pandas
+numpy
+scikit-learn
+streamlit
+tqdm
+accelerate
